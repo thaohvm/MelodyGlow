@@ -1,0 +1,53 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [
+        "username",
+        "name",
+        "id",
+        "image_url"
+    ],
+    "properties": {
+        "username": {
+            "type": "string",
+            "default": "",
+            "title": "The username Schema",
+            "examples": [
+                "username1"
+            ]
+        },
+        "name": {
+            "type": "string",
+            "default": "",
+            "title": "The name Schema",
+            "examples": [
+                "playlist1"
+            ]
+        },
+        "id": {
+            "type": "integer",
+            "default": 0,
+            "title": "The id Schema",
+            "examples": [
+                1
+            ]
+        },
+        "image_url": {
+            "type": "string",
+            "default": "",
+            "title": "The image_url Schema",
+            "examples": [
+                "https://t4.ftcdn.net/jpg/02/85/09/41/360_F_285094193_qTNSorPCjd7F8roAoEwaV1ox3cCjeY6L.jpg"
+            ]
+        }
+    },
+    "examples": [{
+        "username": "username1",
+        "name": "playlist1",
+        "id": 1,
+        "image_url": "https://t4.ftcdn.net/jpg/02/85/09/41/360_F_285094193_qTNSorPCjd7F8roAoEwaV1ox3cCjeY6L.jpg"
+    }]
+}
