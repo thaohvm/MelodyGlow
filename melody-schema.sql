@@ -8,7 +8,7 @@ DROP TABLE  if exists playlists_songs;
 DROP TABLE  if exists songs_genres;
 
 CREATE TABLE users (
-  username VARCHAR(25) UNIQUE,
+  username VARCHAR(25) PRIMARY KEY,
   password TEXT NOT NULL,
   location TEXT NOT NULL,
   email TEXT NOT NULL
@@ -20,7 +20,8 @@ CREATE TABLE songs (
   title TEXT NOT NULL,
   uri TEXT NOT NULL,
   artist TEXT NOT NULL,
-  length INT NOT NULL,
+  playlist TEXT,
+  length TEXT NOT NULL,
   genre TEXT NOT NULL,
   viewed INT NOT NULL
 );

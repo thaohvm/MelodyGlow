@@ -24,7 +24,7 @@ class Playlist {
             `INSERT INTO playlists
             (username, name, image_url)
             VALUES ($1, $2, $3)
-            RETURNING username, name, image_url`,
+            RETURNING id, username, name, image_url`,
             [
                 username,
                 name,
@@ -58,11 +58,17 @@ class Playlist {
         );
         const playlist = playlistRes.rows[0];
 
-        if (!playlist) throw new NotFoundError(`No song id: ${playlist_id}`)
+        if (!playlist) throw new NotFoundError(`No playlist id: ${playlist_id}`)
 
-        await db.query(
-            `INSERT INTO playlists_songs`
+        const songsInPlaylist = await db.query(
+            `INSERT INTO playlists_songs
+            (song_id, playlist_id)
+            VALUES($1, $2)
+            RETURNING song_id, playlist_id`,
+            [song_id,
+            playlist_id]
         )
+        return songsInPlaylist;
     }
 
     static async getPlaylist(playlist_id) {

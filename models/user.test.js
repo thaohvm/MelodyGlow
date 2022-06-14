@@ -2,10 +2,9 @@
 const bcrypt = require("bcrypt");
 
 const db = require("../db.js");
-const User = require("./user.js")
+const User = require("./user.js");
 
 const {
-    NotFoundError,
     BadRequestError,
     UnauthorizedError,
 } = require("../expressError");
