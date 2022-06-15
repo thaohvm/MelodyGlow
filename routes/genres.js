@@ -2,7 +2,7 @@
 
 const express = require("express");
 
-const Genre = require("../models/genres");
+const Genre = require("../models/genre");
 const router = express.Router();
 
 router.get("/", async function (req, res, next) {

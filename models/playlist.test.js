@@ -1,61 +1,22 @@
 "use strict";
 
-const bcrypt = require("bcrypt");
-const { BCRYPT_WORK_FACTOR } = require("../config.js");
-
-const db = require("../db.js");
 const Playlist = require("./playlist.js");
-const User = require("./user.js");
-
+const Song = require("./song.js");
 const { NotFoundError } = require("../expressError");
-const testPlaylistIds = [];
-const testSongIds = [];
 
-beforeEach(async () => {
-    await db.query("DELETE FROM users");
-    await db.query("DELETE FROM playlists");
-    await db.query("DELETE FROM songs");
+const {
+    commonBeforeAll,
+    commonBeforeEach,
+    commonAfterEach,
+    commonAfterAll,
+    testSongIds,
+    testPlaylistIds
+} = require("./_testCommon");
 
-    await db.query(`
-        INSERT INTO users(username,
-                      password,
-                      email,
-                      location)
-        VALUES ('u1', $1, 'u1@email.com','US'),
-            ('u2', $2, 'u2@email.com','Canada')
-        RETURNING username`,
-        [
-            await bcrypt.hash("password1", BCRYPT_WORK_FACTOR),
-            await bcrypt.hash("password2", BCRYPT_WORK_FACTOR),
-        ]);
-
-    const playlistResults = await db.query(`
-        INSERT INTO playlists(username,
-                    name,
-                    image_url)
-        VALUES ('u1','playlist1','http://p1.img'),
-            ('u2','playlist2','http://p2.img')
-        RETURNING id, username, name, image_url`);
-    testPlaylistIds.splice(0, 0, ...playlistResults.rows.map(r => r.id));
-
-    const songResults = await db.query(`
-    INSERT INTO songs(title,
-                    uri,
-                    artist,
-                    playlist,
-                    length,
-                    genre,
-                    viewed)
-    VALUES ('title1', 'uri1', 'anonymous1','playlist1', '3:00','genre1','200'),
-    ('title2', 'uri2', 'anonymous2','playlist2','2:00','genre2','200')
-    RETURNING id, title, uri, artist, playlist, length, genre, viewed`);
-    testSongIds.splice(0, 0, ...songResults.rows.map(r => r.id));
-
-})
-
-afterAll(async () => {
-    await db.end();
-})
+beforeAll(commonBeforeAll);
+beforeEach(commonBeforeEach);
+afterEach(commonAfterEach);
+afterAll(commonAfterAll);
 
 /************************************** create */
 
@@ -73,12 +34,81 @@ describe("create", function () {
 
 /************************************** addSong */
 
-// describe("addSong", function () {
-//     test("can add songs to playlist", async function () {
-//         let songsInPlaylist = await Playlist.addSong({ playlist_id: testPlaylistIds[0], song_id: testSongIds[0] });
-//         expect(playlist).toEqual({
-//             song_id: ,
-//             playlist_id:
-//         });
-//     });
-// });
+describe("addSong", function () {
+    test("can add songs to playlist", async function () {
+        await Playlist.addSong(testPlaylistIds[0], testSongIds[1]);
+        const songsInPlaylist = await Song.getSongsInPlaylist(testPlaylistIds[0])
+        expect(songsInPlaylist).toEqual([
+            {
+                song_id: testSongIds[0]
+            },
+            {
+                song_id: testSongIds[1]
+            }
+        ]);
+    });
+});
+
+/************************************** getPlaylist */
+
+describe("getPlaylist", function () {
+    test("can get detail of a playlist based on playlist_id", async function () {
+        let playlist = await Playlist.getPlaylist(testPlaylistIds[0]);
+        expect(playlist).toEqual({
+            id: testPlaylistIds[0],
+            name: "playlist1",
+            image_url: "http://p1.img",
+            username: "u1"
+        })
+    });
+    test("throw Not Found Error if the playlist is not exist ", async function () {
+        try {
+            await Playlist.getPlaylist(0);
+            fail()
+        } catch (err) {
+            expect(err instanceof NotFoundError).toBeTruthy();
+        }
+    });
+});
+
+/************************************** getAllPlaylist */
+
+describe("getAllPlaylist", function () {
+    test("can get all playlist name", async function () {
+        let playlists = await Playlist.getAllPlaylist();
+        expect(playlists).toEqual([
+            {
+                id: testPlaylistIds[0],
+                name: "playlist1"
+            },
+            {
+                id: testPlaylistIds[1],
+                name: "playlist2"
+            }
+        ])
+    });
+});
+
+/************************************** getAllPlaylistByUser */
+
+describe("getAllPlaylistByUser", function () {
+    test("can get all playlist name of a user", async function () {
+        let playlists = await Playlist.getAllPlaylistByUser("u1");
+        expect(playlists).toEqual([
+            {
+                id: testPlaylistIds[0],
+                name: "playlist1",
+                image_url: "http://p1.img",
+                username: "u1"
+            },
+        ])
+    });
+    test("throw Not Found Error if the user is not exist ", async function () {
+        try {
+            await Playlist.getAllPlaylistByUser("nope");
+            fail();
+        } catch (err) {
+            expect(err instanceof NotFoundError).toBeTruthy();
+        }
+    });
+});

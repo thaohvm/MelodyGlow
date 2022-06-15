@@ -1,33 +1,23 @@
 "use strict";
 
-const db = require("../db.js");
 const Song = require("./song.js");
 
 const { NotFoundError } = require("../expressError");
-const testSongIds = [];
 
-beforeEach(async () => {
-    await db.query("DELETE FROM songs");
-    const songResults = await db.query(`
-    INSERT INTO songs(title,
-                    uri,
-                    artist,
-                    playlist,
-                    length,
-                    genre,
-                    viewed)
-    VALUES ('title1', 'uri1', 'anonymous1','playlist1', '3:00','genre1','200'),
-    ('title2', 'uri2', 'anonymous2','playlist2','2:00','genre2','200')
-    RETURNING id, title, uri, artist, playlist, length, genre, viewed`);
+const {
+    commonBeforeAll,
+    commonBeforeEach,
+    commonAfterEach,
+    commonAfterAll,
+    testSongIds,
+    testPlaylistIds,
+    testGenreIds
+} = require("./_testCommon");
 
-    console.log(songResults.rows[0]);
-    testSongIds.splice(0, 0, ...songResults.rows.map(r => r.id));
-    console.log(testSongIds);
-})
-
-afterAll(async () => {
-    await db.end();
-})
+beforeAll(commonBeforeAll);
+beforeEach(commonBeforeEach);
+afterEach(commonAfterEach);
+afterAll(commonAfterAll);
 
 /************************************** getSong */
 
@@ -39,9 +29,7 @@ describe("getSong", function () {
             title: "title1",
             uri: "uri1",
             artist: "anonymous1",
-            playlist: "playlist1",
             length: "3:00",
-            genre: "genre1",
             viewed: 200
         });
     });
@@ -66,9 +54,7 @@ describe("increased viewed", function () {
             title: "title1",
             uri: "uri1",
             artist: "anonymous1",
-            playlist: "playlist1",
             length: "3:00",
-            genre: "genre1",
             viewed: 201
         });
     });
@@ -87,24 +73,17 @@ describe("increased viewed", function () {
 
 describe("getSongInGenre", function () {
     test("can list the songs which are in a particular genre", async function () {
-        let song = await Song.getSongsInGenre("genre1");
+        let song = await Song.getSongsInGenre(testGenreIds[0]);
         expect(song).toEqual([
             {
-                id: testSongIds[0],
-                title: "title1",
-                uri: "uri1",
-                artist: "anonymous1",
-                playlist: "playlist1",
-                length: "3:00",
-                genre: "genre1",
-                viewed: 200
+                song_id: testSongIds[0],
             }
         ]);
     });
 
     test("throw Not Found Error if the genre is not exist ", async function () {
         try {
-            const song = await Song.getSongsInGenre("nope");
+            const song = await Song.getSongsInGenre(0);
             console.log(song)
             fail();
         } catch (err) {
@@ -117,24 +96,17 @@ describe("getSongInGenre", function () {
 
 describe("getSongInPlaylist", function () {
     test("can list the songs which are in a particular playlist", async function () {
-        let song = await Song.getSongsInPlaylist("playlist1");
+        let song = await Song.getSongsInPlaylist(testPlaylistIds[0]);
         expect(song).toEqual([
             {
-                id: testSongIds[0],
-                title: "title1",
-                uri: "uri1",
-                artist: "anonymous1",
-                playlist: "playlist1",
-                length: "3:00",
-                genre: "genre1",
-                viewed: 200
+                song_id: testSongIds[0],
             }
         ]);
     });
 
     test("throw Not Found Error if the playlist is not exist ", async function () {
         try {
-            const song = await Song.getSongsInPlaylist("nope");
+            const song = await Song.getSongsInPlaylist(0);
             fail();
         } catch (err) {
             expect(err instanceof NotFoundError).toBeTruthy();

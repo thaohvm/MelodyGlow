@@ -39,11 +39,11 @@ class Playlist {
      *
      */
 
-    static async addSong({ playlist_id, song_id }) {
+    static async addSong( playlist_id, song_id ) {
         const songRes = await db.query(
             `SELECT id
             FROM songs
-            WHERE song_id = $1`,
+            WHERE id = $1`,
             [song_id]
         );
         const song = songRes.rows[0];
@@ -53,7 +53,7 @@ class Playlist {
         const playlistRes = await db.query(
             `SELECT id
             FROM playlists
-            WHERE playlist_id = $1`,
+            WHERE id = $1`,
             [playlist_id]
         );
         const playlist = playlistRes.rows[0];
@@ -64,7 +64,7 @@ class Playlist {
             `INSERT INTO playlists_songs
             (song_id, playlist_id)
             VALUES($1, $2)
-            RETURNING song_id, playlist_id`,
+            RETURNING id, song_id, playlist_id`,
             [song_id,
             playlist_id]
         )
@@ -73,7 +73,7 @@ class Playlist {
 
     static async getPlaylist(playlist_id) {
         const playlistRes = await db.query(
-            `SELECT id, name
+            `SELECT id, name, image_url, username
             FROM playlists
             WHERE id = $1`,
             [playlist_id]
@@ -81,6 +81,32 @@ class Playlist {
         const playlist = playlistRes.rows[0];
 
         if (!playlist) throw new NotFoundError(`No playlist: ${playlist_id}`);
+        return playlist;
+    }
+
+    static async getAllPlaylist() {
+        const playlistRes = await db.query(
+            `SELECT id, name
+            FROM playlists
+            ORDER BY name`
+        );
+        const playlist = playlistRes.rows;
+
+        if (!playlist) throw new NotFoundError(`No playlist: ${playlist_id}`);
+        return playlist;
+    }
+
+    static async getAllPlaylistByUser(username) {
+        const playlistRes = await db.query(
+            `SELECT id, name, image_url, username
+            FROM playlists
+            WHERE username = $1`,
+            [username]
+        );
+        const playlist = playlistRes.rows;
+
+        if (playlist.length === 0) throw new NotFoundError(`No user: ${username}`);
+        return playlist;
     }
 }
 

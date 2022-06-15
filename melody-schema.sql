@@ -20,9 +20,7 @@ CREATE TABLE songs (
   title TEXT NOT NULL,
   uri TEXT NOT NULL,
   artist TEXT NOT NULL,
-  playlist TEXT,
   length TEXT NOT NULL,
-  genre TEXT NOT NULL,
   viewed INT NOT NULL
 );
 
@@ -39,25 +37,25 @@ CREATE TABLE playlists (
 );
 
 CREATE TABLE users_songs (
-    username VARCHAR(25) REFERENCES users ON DELETE CASCADE,
-    song_id INTEGER NOT NULL REFERENCES songs,
-    PRIMARY KEY(username,song_id)
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(25) REFERENCES users ON DELETE CASCADE,
+  song_id INTEGER NOT NULL REFERENCES songs
 );
 
 CREATE TABLE users_playlists (
-    username VARCHAR(25) REFERENCES users ON DELETE CASCADE,
-    playlist_id INTEGER NOT NULL REFERENCES playlists,
-    PRIMARY KEY(username, playlist_id)
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(25) REFERENCES users ON DELETE CASCADE,
+  playlist_id INTEGER NOT NULL REFERENCES playlists
 );
 
 CREATE TABLE playlists_songs (
-    playlist_id INTEGER NOT NULL REFERENCES playlists,
-    song_id INTEGER NOT NULL REFERENCES songs,
-    PRIMARY KEY(playlist_id, song_id)
+  id SERIAL PRIMARY KEY,
+  playlist_id INTEGER NOT NULL REFERENCES playlists ON DELETE CASCADE,
+  song_id INTEGER NOT NULL REFERENCES songs
 );
 
 CREATE TABLE songs_genres (
-    genre_id INTEGER NOT NULL REFERENCES genres,
-    song_id INTEGER NOT NULL REFERENCES songs,
-    PRIMARY KEY(genre_id, song_id)
+  id SERIAL PRIMARY KEY,
+  genre_id INTEGER NOT NULL REFERENCES genres ON DELETE CASCADE,
+  song_id INTEGER NOT NULL REFERENCES songs
 );
