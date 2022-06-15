@@ -10,7 +10,7 @@ const playlistNewSchema = require("../schemas/playlistNew.json");
 const router = express.Router();
 const { authenticateJWT } = require('../middleware/auth')
 
-router.post("/", authenticateJWT, async function (req, res, next) {
+router.post("/create", authenticateJWT, async function (req, res, next) {
     try {
         const validator = jsonschema.validate(req.body, playlistNewSchema);
         if (!validator.valid) {
@@ -37,7 +37,26 @@ router.post("/add/:song_id", authenticateJWT, async function (req, res, next) {
 router.get("/:playlist_id", async function (req, res, next) {
     try {
         const playlist_id = req.params.playlist_id;
-        const playlist = await Playlist(playlist_id);
+        const playlist = await Playlist.getPlaylist(playlist_id);
+        return res.json({ playlist });
+    } catch (err) {
+        return next(err);
+    }
+});
+
+router.get("/", async function (req, res, next) {
+    try {
+        const playlist = await Playlist.getAllPlaylist();
+        return res.json({ playlist });
+    } catch (err) {
+        return next(err);
+    }
+});
+
+router.get("/:username", async function (req, res, next) {
+    try {
+        const username = req.params.username;
+        const playlist = await Playlist.getAllPlaylistByUser(username);
         return res.json({ playlist });
     } catch (err) {
         return next(err);

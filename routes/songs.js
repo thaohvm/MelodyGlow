@@ -14,7 +14,7 @@ router.get("/", async function (req, res, next) {
     }
 });
 
-router.post("/:song_id/viewed", async function (req, res, next) {
+router.put("/:song_id/viewed", async function (req, res, next) {
     try {
         const song_id = req.params.song_id;
         const song = await Song.increasedViews(song_id);
@@ -24,20 +24,20 @@ router.post("/:song_id/viewed", async function (req, res, next) {
     }
 });
 
-router.get("/:genre", async function (req, res, next) {
+router.get("/:genre_id", async function (req, res, next) {
     try {
-        const genre = req.params.genre;
-        const songs = await Song.getSongsInGenre(genre);
+        const genre_id = req.params.genre_id;
+        const songs = await Song.getSongsInGenre(genre_id);
         return res.json({ songs })
     } catch (e) {
         return next(e);
     }
 });
 
-router.get("/:playlist", async function (req, res, next) {
+router.get("/:playlist_id", async function (req, res, next) {
     try {
-        const playlist = req.params.playlist;
-        const songs = await Song.getSongsInGenre(playlist);
+        const playlist_id = req.params.playlist;
+        const songs = await Song.getSongsInPlaylist(playlist_id);
         return res.json({ songs })
     } catch (e) {
         return next(e);
