@@ -45,6 +45,24 @@ async function commonBeforeAll() {
             name: "genre2"
         });
 
+    testSongIds[0] = await Song.create(
+        {
+            title: "title1",
+            uri: "uri1",
+            artist: "artist1",
+            length: "3:00",
+            viewed: 200
+        });
+
+    testSongIds[1] = await Song.create(
+        {
+            title: "title2",
+            uri: "uri2",
+            artist: "artist2",
+            length: "3:00",
+            viewed: 200
+        });
+
     await User.register({
         username: "u1",
         email: "user1@user.com",

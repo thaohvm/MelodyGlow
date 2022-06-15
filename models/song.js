@@ -19,6 +19,18 @@ class Song {
         return song;
     }
 
+    static async create({ title, uri, artist, length, viewed }) {
+        const result = await db.query(
+            `INSERT INTO songs
+            (title, uri, artist, length, viewed)
+            VALUES ($1, $2, $3, $4, $5)
+            RETURNING id, title, uri, artist, length, viewed`,
+            [title, uri, artist, length, viewed]
+        );
+        if (result.rows.length === 0) throw new NotFoundError (`No song exist: ${title}`)
+        return result.rows[0];
+    }
+
     static async increasedViews(song_id) {
         const result = await db.query(
             `UPDATE songs
