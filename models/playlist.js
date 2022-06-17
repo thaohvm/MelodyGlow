@@ -68,7 +68,7 @@ class Playlist {
             [song_id,
             playlist_id]
         )
-        return songsInPlaylist;
+        return songsInPlaylist.rows[0];
     }
 
     static async getPlaylist(playlist_id) {

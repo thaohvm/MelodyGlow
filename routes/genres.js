@@ -2,7 +2,9 @@
 
 const express = require("express");
 const router = express.Router();
-
+const jsonschema = require("jsonschema");
+const { BadRequestError } = require("../expressError");
+const { authenticateJWT } = require('../middleware/auth')
 const Genre = require("../models/genre");
 const genreNewSchema = require("../schemas/genreNew.json");
 
@@ -15,7 +17,7 @@ router.get("/", async function (req, res, next) {
     }
 });
 
-router.get("/create", async function (req, res, next) {
+router.post("/create", async function (req, res, next) {
     try {
         const validator = jsonschema.validate(req.body, genreNewSchema);
         if (!validator.valid) {
@@ -27,4 +29,17 @@ router.get("/create", async function (req, res, next) {
     } catch (err) {
         return next(err);
     }
-})
+});
+
+router.post("/:genre_id/add/:song_id", authenticateJWT, async function (req, res, next) {
+    try {
+        const genre_id = req.params.genre_id;
+        const song_id = req.params.song_id;
+        const genre = await Genre.addSong(song_id, genre_id);
+        return res.status(201).json({ genre });
+    } catch (err) {
+        return next(err);
+    }
+});
+
+module.exports = router;

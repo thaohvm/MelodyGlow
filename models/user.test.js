@@ -63,18 +63,18 @@ describe("authenticate", function () {
 
 describe("register", function () {
     const newUser = {
-        username: "u2",
-        email: "u2@test.com",
+        username: "u3",
+        email: "u3@test.com",
         location: "Canada"
     };
 
     test("should register with valid input", async function () {
         let user = await User.register({
             ...newUser,
-            password: "password2",
+            password: "password3",
         });
         expect(user).toEqual(newUser);
-        const found = await db.query("SELECT * FROM users WHERE username = 'u2'");
+        const found = await db.query("SELECT * FROM users WHERE username = 'u3'");
         expect(found.rows.length).toEqual(1);
         expect(found.rows[0].password.startsWith("$2b$")).toEqual(true);
     });

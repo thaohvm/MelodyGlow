@@ -24,10 +24,11 @@ router.post("/create", authenticateJWT, async function (req, res, next) {
     }
 });
 
-router.post("/add/:song_id", authenticateJWT, async function (req, res, next) {
+router.post("/:playlist_id/add/:song_id", authenticateJWT, async function (req, res, next) {
     try {
+        const playlist_id = req.params.playlist_id;
         const song_id = req.params.song_id;
-        const playlist = await Playlist.addSong(song_id);
+        const playlist = await Playlist.addSong(playlist_id, song_id);
         return res.status(201).json({ playlist });
     } catch (err) {
         return next(err);
@@ -53,7 +54,7 @@ router.get("/", async function (req, res, next) {
     }
 });
 
-router.get("/:username", async function (req, res, next) {
+router.get("/user/:username", async function (req, res, next) {
     try {
         const username = req.params.username;
         const playlist = await Playlist.getAllPlaylistByUser(username);
@@ -62,3 +63,5 @@ router.get("/:username", async function (req, res, next) {
         return next(err);
     }
 });
+
+module.exports = router;

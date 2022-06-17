@@ -10,6 +10,7 @@ const authRoutes = require("./routes/auth");
 const genresRoutes = require("./routes/genres");
 const songsRoutes = require("./routes/songs");
 const playlistsRoutes = require("./routes/playlists");
+const { authenticateJWT } = require('./middleware/auth');
 
 const app = express();
 

@@ -4,7 +4,7 @@ const express = require("express");
 
 const { BadRequestError } = require("../expressError");
 const User = require("../models/user");
-const { authenticateJWT } = require('../middleware/auth')
+const { authenticateJWT } = require('../middleware/auth');
 const router = express.Router();
 
 router.get("/", authenticateJWT, async function (req, res, next) {
@@ -15,3 +15,5 @@ router.get("/", authenticateJWT, async function (req, res, next) {
         return next(e);
     }
 })
+
+module.exports = router;

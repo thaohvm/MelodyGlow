@@ -7,7 +7,6 @@
     "required": [
         "username",
         "name",
-        "id",
         "image_url"
     ],
     "properties": {
@@ -27,14 +26,6 @@
                 "playlist1"
             ]
         },
-        "id": {
-            "type": "integer",
-            "default": 0,
-            "title": "The id Schema",
-            "examples": [
-                1
-            ]
-        },
         "image_url": {
             "type": "string",
             "default": "",
@@ -47,7 +38,6 @@
     "examples": [{
         "username": "username1",
         "name": "playlist1",
-        "id": 1,
         "image_url": "https://t4.ftcdn.net/jpg/02/85/09/41/360_F_285094193_qTNSorPCjd7F8roAoEwaV1ox3cCjeY6L.jpg"
     }]
 }
