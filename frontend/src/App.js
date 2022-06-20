@@ -1,26 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import NavBar from './NavBar';
+import Routes from './routes/Routes';
+import MelodyApi from './api';
+import { decode } from "jsonwebtoken";
+import CurrentUserContext from './users/CurrentUserContext';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentUser: null,
+    }
+
+    this.getCurrentUser = this.getCurrentUser.bind(this);
+  }
+
+  async componentDidMount() {
+    let currentUser = await this.getCurrentUser();
+    console.log(currentUser);
+    if (currentUser !== undefined) {
+      this.setState({ currentUser: currentUser.username });
+    }
+  }
+
+  async getCurrentUser() {
+    try {
+      let token = localStorage.getItem("token");
+      let { username } = decode(token);
+      let currentUser = await MelodyApi.getUser(username);
+      return currentUser;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  render() {
+
+    return (
+      <CurrentUserContext.Provider value={this.state}>
+        <div className='App'>
+          <BrowserRouter>
+            <NavBar />
+            <main>
+              <Switch>
+                <Routes render={(props) => <Route {...props} />} />
+              </Switch>
+            </main>
+          </BrowserRouter>
+        </div>
+      </CurrentUserContext.Provider>
+    )
+  }
 }
 
 export default App;
