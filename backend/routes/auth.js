@@ -40,7 +40,7 @@ router.post("/login", async function (req, res, next) {
     try {
         if (await User.authenticate(req.body.username, req.body.password)) {
             const username = req.body.username;
-            const token = jwt.sign({ username }, config.db.SECRET_KEY);
+            const token = jwt.sign({ username }, config.SECRET_KEY);
             res.json({ token });
         } else {
             res.status(401).json({ error: "Invalid username/password" });
