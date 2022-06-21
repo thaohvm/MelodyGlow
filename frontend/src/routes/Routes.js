@@ -60,13 +60,13 @@ class Routes extends Component {
                     <Route exact path="/login"
                         render={props => <LoginForm handleLogin={this.login} {...props} />}
                     />
-                    <PrivateRoute path="/logout"
+                    <Route path="/logout"
                         onClick={this.logout}
                     />
-                    <PrivateRoute exact path="/genre"
+                    <Route exact path="/genre"
                         render={props => <GenreList {...props} />}
                     />
-                    <PrivateRoute exact path="/genre/:genre_id"
+                    <Route exact path="/genre/:genre_id"
                         render={props => <GenreCard {...props} />}
                     />
                     <PrivateRoute path="/playlist"

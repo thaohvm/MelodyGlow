@@ -18,7 +18,6 @@ class App extends Component {
 
   async componentDidMount() {
     let currentUser = await this.getCurrentUser();
-    console.log(currentUser);
     if (currentUser !== undefined) {
       this.setState({ currentUser: currentUser.username });
     }
