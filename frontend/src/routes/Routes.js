@@ -4,6 +4,9 @@ import SignUpForm from '../users/SignUpForm';
 import LoginForm from '../users/LoginForm';
 import PrivateRoute from './PrivateRoute';
 import Home from '../Home';
+import GenreCard from '../genre/GenreCard';
+import GenreList from '../genre/GenreList';
+import PlaylistList from '../playlist/PlaylistList';
 import MelodyApi from '../api';
 
 class Routes extends Component {
@@ -60,18 +63,19 @@ class Routes extends Component {
                     <PrivateRoute path="/logout"
                         onClick={this.logout}
                     />
-                    {/* <PrivateRoute exact path="/companies"
-                        render={props => <CompanyList {...props} />}
+                    <PrivateRoute exact path="/genre"
+                        render={props => <GenreList {...props} />}
                     />
-                    <PrivateRoute exact path="/companies/:handle"
-                        render={props => <CompanyDetail {...props} />}
+                    <PrivateRoute exact path="/genre/:genre_id"
+                        render={props => <GenreCard {...props} />}
                     />
-                    <PrivateRoute path="/jobs"
-                        render={props => <JobList {...props} />}
+                    <PrivateRoute path="/playlist"
+                        render={props => <PlaylistList {...props} />}
                     />
-                    <PrivateRoute path="/profile"
-                    render={props => <ProfileForm {...props} />} />
-                    <Redirect to="/" /> */}
+
+                    {/* <PrivateRoute path="/favorite"
+                    render={props => <Favorite {...props} />} /> */}
+                    <Redirect to="/" />
                 </Switch>
             </div>
         )

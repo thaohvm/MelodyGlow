@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 
-class GenreList extends Component {
+class SongCard extends Component {
 
     render() {
         return (
             <div>
-                GenreList
+                SongCard
             </div>
         );
 
     }
 }
 
-export default GenreList;
+export default SongCard;
