@@ -9,6 +9,7 @@ import {
 class NavBar extends Component {
     constructor(props) {
         super(props);
+        console.log(this.props)
         this.logout = this.logout.bind(this);
     }
 

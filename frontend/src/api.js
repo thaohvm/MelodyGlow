@@ -47,10 +47,25 @@ class MelodyApi {
         return res.token;
     }
 
-    // static async getGenres() {
-    //     let res = await this.request("genres");
-    //     return res.genres;
-    // }
+    static async getUser(username) {
+        let res = await this.request(`users/${username}`);
+        return res.user;
+    }
+
+    static async getAllGenres() {
+        let res = await this.request("genres");
+        return res.genres;
+    }
+
+    static async getAllPlaylist() {
+        let res = await this.request("playlists");
+        return res.playlist;
+    }
+
+    static async getAllSong() {
+        let res = await this.request("songs");
+        return res.songs;
+    }
 
 }
 

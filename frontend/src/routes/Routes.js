@@ -7,6 +7,7 @@ import Home from '../Home';
 import GenreCard from '../genre/GenreCard';
 import GenreList from '../genre/GenreList';
 import PlaylistList from '../playlist/PlaylistList';
+import PlaylistCard from '../playlist/PlaylistCard';
 import MelodyApi from '../api';
 
 class Routes extends Component {
@@ -60,17 +61,20 @@ class Routes extends Component {
                     <Route exact path="/login"
                         render={props => <LoginForm handleLogin={this.login} {...props} />}
                     />
-                    <Route path="/logout"
+                    <PrivateRoute path="/logout"
                         onClick={this.logout}
                     />
-                    <Route exact path="/genre"
+                    <PrivateRoute exact path="/genre"
                         render={props => <GenreList {...props} />}
                     />
-                    <Route exact path="/genre/:genre_id"
+                    <PrivateRoute exact path="/genre/:genre_id"
                         render={props => <GenreCard {...props} />}
                     />
                     <PrivateRoute path="/playlist"
                         render={props => <PlaylistList {...props} />}
+                    />
+                    <PrivateRoute path="/playlist/:playlist_id"
+                        render={props => <PlaylistCard {...props} />}
                     />
 
                     {/* <PrivateRoute path="/favorite"
