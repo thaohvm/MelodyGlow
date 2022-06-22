@@ -5,6 +5,18 @@ const { NotFoundError } = require("../expressError");
 
 class Song {
 
+    static async getAllSong() {
+        const result = await db.query(
+            `SELECT id, title, uri, artist, length, viewed
+            FROM songs
+            ORDER BY title`,
+        );
+        const songs = result.rows;
+
+        if (!songs) throw new NotFoundError(`No song available`);
+        return songs;
+    }
+
     static async getSong(song_id) {
         const result = await db.query(
             `SELECT id, title, uri, artist, length, viewed

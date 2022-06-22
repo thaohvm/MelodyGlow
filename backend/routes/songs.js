@@ -5,6 +5,15 @@ const express = require("express");
 const Song = require("../models/song");
 const router = express.Router();
 
+router.get("/", async function (req, res, next) {
+    try {
+        const songs = await Song.getAllSong();
+        return res.json({ songs })
+    } catch (e) {
+        return next(e);
+    }
+});
+
 router.get("/:song_id", async function (req, res, next) {
     try {
         const song_id = req.params.song_id;
