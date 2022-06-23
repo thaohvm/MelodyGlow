@@ -71,45 +71,45 @@ describe("increased viewed", function () {
 
 /************************************** getSongInGenre */
 
-describe("getSongInGenre", function () {
-    test("can list the songs which are in a particular genre", async function () {
-        let song = await Song.getSongsInGenre(testGenreIds[0]);
-        expect(song).toEqual([
-            {
-                song_id: testSongIds[0],
-            }
-        ]);
-    });
+// describe("getSongInGenre", function () {
+//     test("can list the songs which are in a particular genre", async function () {
+//         let song = await Song.getSongsInGenre(testGenreIds[0]);
+//         expect(song).toEqual([
+//             {
+//                 song_id: testSongIds[0],
+//             }
+//         ]);
+//     });
 
-    test("throw Not Found Error if the genre is not exist ", async function () {
-        try {
-            const song = await Song.getSongsInGenre(0);
-            console.log(song)
-            fail();
-        } catch (err) {
-            expect(err instanceof NotFoundError).toBeTruthy();
-        }
-    });
-});
+//     test("throw Not Found Error if the genre is not exist ", async function () {
+//         try {
+//             const song = await Song.getSongsInGenre(0);
+//             console.log(song)
+//             fail();
+//         } catch (err) {
+//             expect(err instanceof NotFoundError).toBeTruthy();
+//         }
+//     });
+// });
 
 /************************************** getSongInPlaylist */
 
-describe("getSongInPlaylist", function () {
-    test("can list the songs which are in a particular playlist", async function () {
-        let song = await Song.getSongsInPlaylist(testPlaylistIds[0]);
-        expect(song).toEqual([
-            {
-                song_id: testSongIds[0],
-            }
-        ]);
-    });
+// describe("getSongInPlaylist", function () {
+//     test("can list the songs which are in a particular playlist", async function () {
+//         let song = await Song.getSongsInPlaylist(testPlaylistIds[0]);
+//         expect(song).toEqual([
+//             {
+//                 song_id: testSongIds[0],
+//             }
+//         ]);
+//     });
 
-    test("throw Not Found Error if the playlist is not exist ", async function () {
-        try {
-            const song = await Song.getSongsInPlaylist(0);
-            fail();
-        } catch (err) {
-            expect(err instanceof NotFoundError).toBeTruthy();
-        }
-    });
-});
+//     test("throw Not Found Error if the playlist is not exist ", async function () {
+//         try {
+//             const song = await Song.getSongsInPlaylist(0);
+//             fail();
+//         } catch (err) {
+//             expect(err instanceof NotFoundError).toBeTruthy();
+//         }
+//     });
+// });

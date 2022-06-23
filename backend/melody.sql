@@ -13,6 +13,6 @@ CREATE DATABASE melody;
 
 DROP DATABASE melody_test;
 CREATE DATABASE melody_test;
-\connect melody
+\connect melody_test
 
 \i melody-schema.sql

@@ -1,11 +1,11 @@
-DROP TABLE  if exists users;
-DROP TABLE  if exists songs;
-DROP TABLE  if exists genres;
-DROP TABLE  if exists playlists;
-DROP TABLE  if exists users_songs;
-DROP TABLE  if exists users_playlists;
-DROP TABLE  if exists playlists_songs;
 DROP TABLE  if exists songs_genres;
+DROP TABLE  if exists playlists_songs;
+DROP TABLE  if exists users_playlists;
+DROP TABLE  if exists users_songs;
+DROP TABLE  if exists playlists;
+DROP TABLE  if exists genres;
+DROP TABLE  if exists songs;
+DROP TABLE  if exists users;
 
 CREATE TABLE users (
   username VARCHAR(25) PRIMARY KEY,
