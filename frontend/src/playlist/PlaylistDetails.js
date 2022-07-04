@@ -7,26 +7,32 @@ class PlaylistDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            playlist: { songs: [] },
+            playlist: {
+                name: "",
+            },
+            songs: [],
         }
     }
 
     async componentDidMount() {
-        let playlistId = this.props.match.params.playlist_id;
-        let playlist = await MelodyApi.getPlaylistDetails(playlistId);
-        let songs = await MelodyApi.getAllSongOfPlaylist(playlistId);
-        this.setState({ playlist });
+        let id = this.props.match.params.playlist_id;
+        let playlist = await MelodyApi.getPlaylistDetails(id);
+        let songs = await MelodyApi.getAllSongOfPlaylist(id);
+        this.setState({
+            playlist: playlist,
+            songs: songs,
+        })
     }
 
     render() {
-        let { songs } = this.state;
-
+        let { playlist, songs } = this.state;
+        console.log(this.state);
         return (
             <div>
                 <div className="playlist-card my-3">
                     <div className="card-body">
 
-                        <h5 className="card-title">Playlist: {playlist.id}</h5>
+                        <h5 className="card-title">Playlist: {playlist.name}</h5>
                         <p>Song list:</p>
                         {songs.map(song =>
                             <ol><SongCard

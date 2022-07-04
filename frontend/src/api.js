@@ -81,6 +81,11 @@ class MelodyApi {
         let res = await this.request(`playlists/${playlist_id}`);
         return res.playlist;
     }
+
+    static async getGenreDetails(genre_id) {
+        let res = await this.request(`genres/${genre_id}`);
+        return res.genre;
+    }
 }
 
 export default MelodyApi;
