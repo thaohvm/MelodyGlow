@@ -26,11 +26,11 @@ class NavBar extends Component {
         if (currentUser) {
           return (
             <Navbar bg="light" expand="lg">
-              <NavbarBrand exact to="/" className="navbar-brand">
+              <NavLink exact to="/" className="navbar-brand">
                 Melody Glow
-              </NavbarBrand>
+              </NavLink>
               <Nav>
-                <NavLink exact to="/genres" className="navbar">
+                <NavLink exact to="/genre" className="navbar">
                   Genres
                 </NavLink>
 

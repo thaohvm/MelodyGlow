@@ -1,8 +1,8 @@
 import React, { Component } from "react";
+import SongCard from "../song/SongCard";
 import MelodyApi from "../api";
-import SongCard from "./SongCard";
 
-class SongList extends Component {
+class GenreDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -10,28 +10,32 @@ class SongList extends Component {
         }
     }
 
-    // async componentDidMount() {
-    //     let songs = await MelodyApi.getAllSong();
-    //     this.setState({ songs });
-    // }
+    async componentDidMount() {
+        let genre_id = this.props.match.params.genre_id;
+        let songs = await MelodyApi.getAllSongOfGenre(genre_id);
+        this.setState({ songs });
+    }
 
     render() {
         let { songs } = this.state;
-
         return (
             <div>
-                <div className="song-card my-3">
+                <div className="genre-card my-3">
                     <div className="card-body">
-                        {songs.map(song => (
-                            <SongCard
+
+                        <h5 className="card-title">Genre: Testing</h5>
+                        <p>Song list:</p>
+                        {songs.map(song =>
+                            <ol><SongCard
                                 key={song.id}
+                                id={song.id}
                                 title={song.title}
                                 uri={song.uri}
                                 artist={song.artist}
                                 length={song.length}
                                 viewed={song.viewed}
                             />
-                        ))}
+                            </ol>)}
                     </div>
                 </div>
             </div>
@@ -39,4 +43,4 @@ class SongList extends Component {
     }
 }
 
-export default SongList;
+export default GenreDetails;

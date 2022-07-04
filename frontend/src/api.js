@@ -67,6 +67,20 @@ class MelodyApi {
         return res.songs;
     }
 
+    static async getAllSongOfPlaylist(playlist_id) {
+        let res = await this.request(`songs/playlist/${playlist_id}`);
+        return res.songs;
+    }
+
+    static async getAllSongOfGenre(genre_id) {
+        let res = await this.request(`songs/genre/${genre_id}`);
+        return res.songs;
+    }
+
+    static async getPlaylistDetails(playlist_id) {
+        let res = await this.request(`playlists/${playlist_id}`);
+        return res.playlist;
+    }
 }
 
 export default MelodyApi;

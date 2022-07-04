@@ -4,10 +4,10 @@ import SignUpForm from '../users/SignUpForm';
 import LoginForm from '../users/LoginForm';
 import PrivateRoute from './PrivateRoute';
 import Home from '../Home';
-import GenreCard from '../genre/GenreCard';
 import GenreList from '../genre/GenreList';
+import GenreDetails from '../genre/GenreDetails';
 import PlaylistList from '../playlist/PlaylistList';
-import PlaylistCard from '../playlist/PlaylistCard';
+import PlaylistDetails from '../playlist/PlaylistDetails';
 import MelodyApi from '../api';
 
 class Routes extends Component {
@@ -68,13 +68,13 @@ class Routes extends Component {
                         render={props => <GenreList {...props} />}
                     />
                     <PrivateRoute exact path="/genre/:genre_id"
-                        render={props => <GenreCard {...props} />}
+                        render={props => <GenreDetails {...props} />}
                     />
-                    <PrivateRoute path="/playlist"
+                    <PrivateRoute exact path="/playlist"
                         render={props => <PlaylistList {...props} />}
                     />
-                    <PrivateRoute path="/playlist/:playlist_id"
-                        render={props => <PlaylistCard {...props} />}
+                    <PrivateRoute exact path="/playlist/:playlist_id"
+                        render={props => <PlaylistDetails {...props} />}
                     />
 
                     {/* <PrivateRoute path="/favorite"

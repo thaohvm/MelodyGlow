@@ -18,6 +18,7 @@ class PlaylistList extends Component {
 
     render() {
         let { playlists } = this.state;
+
         return (
             <div className='Playlist'>
                 <h1> List of playlists</h1>
@@ -25,6 +26,7 @@ class PlaylistList extends Component {
                 {playlists.map(playlist => (
                     <PlaylistCard
                     key={playlist.id}
+                    id={playlist.id}
                     name={playlist.name}
                     image_url={playlist.image_url}
                     username={playlist.username}

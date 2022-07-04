@@ -25,6 +25,7 @@ class GenreList extends Component {
                 {genres.map(genre => (
                     <GenreCard
                     key={genre.id}
+                    id={genre.id}
                     name={genre.name}
                     />
                 ))}
