@@ -11,6 +11,7 @@ class App extends Component {
     super(props);
     this.state = {
       currentUser: null,
+      loaded: false,
     }
 
     this.getCurrentUser = this.getCurrentUser.bind(this);
@@ -19,7 +20,15 @@ class App extends Component {
   async componentDidMount() {
     let currentUser = await this.getCurrentUser();
     if (currentUser !== undefined) {
-      this.setState({ currentUser: currentUser.username });
+      this.setState({
+        currentUser: currentUser.username,
+        loaded: true,
+      });
+    } else {
+      this.setState({
+        currentUser: null,
+        loaded: true,
+      });
     }
   }
 
@@ -35,21 +44,26 @@ class App extends Component {
   }
 
   render() {
-
-    return (
-      <CurrentUserContext.Provider value={this.state}>
-        <div className='App'>
-          <BrowserRouter>
-            <NavBar />
-            <main>
-              <Switch>
-                <Routes render={(props) => <Route {...props} />} />
-              </Switch>
-            </main>
-          </BrowserRouter>
-        </div>
-      </CurrentUserContext.Provider>
-    )
+    if (this.state.loaded) {
+      return (
+        <CurrentUserContext.Provider value={this.state}>
+          <div className='App'>
+            <BrowserRouter>
+              <NavBar />
+              <main>
+                <Switch>
+                  <Routes render={(props) => <Route {...props} />} />
+                </Switch>
+              </main>
+            </BrowserRouter>
+          </div>
+        </CurrentUserContext.Provider>
+      )
+    } else {
+      return (
+        <div></div>
+      );
+    }
   }
 }
 

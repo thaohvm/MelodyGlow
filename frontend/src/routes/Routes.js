@@ -9,6 +9,8 @@ import GenreDetails from '../genre/GenreDetails';
 import PlaylistList from '../playlist/PlaylistList';
 import PlaylistDetails from '../playlist/PlaylistDetails';
 import MelodyApi from '../api';
+import NewPlaylistForm from '../favorite/NewPlaylistForm';
+import FavoriteList from '../favorite/FavoriteList';
 
 class Routes extends Component {
     constructor(props) {
@@ -19,6 +21,7 @@ class Routes extends Component {
         this.login = this.login.bind(this);
         this.signUp = this.signUp.bind(this);
         this.logout = this.logout.bind(this);
+        this.createPlaylist = this.createPlaylist.bind(this);
     }
 
     async signUp(data) {
@@ -43,6 +46,15 @@ class Routes extends Component {
         }
     }
 
+    async createPlaylist() {
+        try {
+
+        } catch (err) {
+            console.error("fail to create playlist", err);
+            return { success: false, err }
+        }
+    }
+
     logout() {
         localStorage.removeItem("token");
         document.location.href = "/";
@@ -61,6 +73,9 @@ class Routes extends Component {
                     <Route exact path="/login"
                         render={props => <LoginForm handleLogin={this.login} {...props} />}
                     />
+                    {/* <PrivateRoute exact path="/favorite/create-playlist"
+                        render={props => <NewPlaylistForm addNewPlaylist={this.createPlaylist} {...props} />}
+                    /> */}
                     <PrivateRoute path="/logout"
                         onClick={this.logout}
                     />
@@ -76,9 +91,8 @@ class Routes extends Component {
                     <PrivateRoute exact path="/playlist/:playlist_id"
                         render={props => <PlaylistDetails {...props} />}
                     />
-
-                    {/* <PrivateRoute path="/favorite"
-                    render={props => <Favorite {...props} />} /> */}
+                    <PrivateRoute path="/favorite"
+                    render={props => <FavoriteList {...props} />} />
                     <Redirect to="/" />
                 </Switch>
             </div>
