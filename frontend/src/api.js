@@ -88,7 +88,7 @@ class MelodyApi {
     }
 
     static async getPlaylistByUser(username) {
-        let res = await this.request(`playlists//user/${username}`);
+        let res = await this.request(`playlists/user/${username}`);
         return res.playlist;
     }
 

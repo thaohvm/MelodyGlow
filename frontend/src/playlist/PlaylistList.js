@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import MelodyApi from "../api";
 import PlaylistCard from "./PlaylistCard";
+import CurrentUserContext from "../users/CurrentUserContext";
 
 class PlaylistList extends Component {
     constructor(props) {
@@ -11,7 +12,7 @@ class PlaylistList extends Component {
     }
 
     async componentDidMount() {
-        let playlists = await MelodyApi.getAllPlaylist();
+        let playlists = await MelodyApi.getPlaylistByUser("testuser");
         console.log(playlists);
         this.setState({ playlists });
     }
