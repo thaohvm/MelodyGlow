@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import SongCard from "../song/SongCard";
 import MelodyApi from "../api";
 
@@ -26,7 +25,6 @@ class PlaylistDetails extends Component {
 
     render() {
         let { playlist, songs } = this.state;
-        console.log(this.state);
         return (
             <div>
                 <div className="playlist-card my-3">

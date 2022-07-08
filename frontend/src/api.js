@@ -96,6 +96,15 @@ class MelodyApi {
         let res = await this.request(`playlists/create`, data, "post");
         return res.playlist;
     }
+
+    static async addSongToPlaylist(playlist_id, song_id) {
+        let data = {
+            playlist_id: playlist_id,
+            song_id: song_id
+        }
+        let res = await this.request(`playlists/${playlist_id}/add/${song_id}`, data, "post");
+        return res.playlist;
+    }
 }
 
 export default MelodyApi;

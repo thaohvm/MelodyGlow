@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import NewPlaylistForm from "./NewPlaylistForm";
 import MelodyApi from "../api";
 import CurrentUserContext from "../users/CurrentUserContext";
+import { Link } from "react-router-dom";
 
 class FavoriteList extends Component {
     static contextType = CurrentUserContext;
@@ -32,7 +33,7 @@ class FavoriteList extends Component {
         if (this.state.playlists !== null) {
             playlists = this.state.playlists.map((playlist) =>
                 <div>
-                    <li>{playlist.name}</li>
+                    <li><Link to={`/playlist/${playlist.id}`}>{playlist.name}</Link></li>
                     <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/record.png" width="100"></img>
                 </div>
 

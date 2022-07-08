@@ -93,6 +93,9 @@ class Routes extends Component {
                     />
                     <PrivateRoute path="/favorite"
                     render={props => <FavoriteList {...props} />} />
+
+                    <PrivateRoute path="/favorite/:playlist_id"
+                    render={props => <PlaylistDetails {...props} />} />
                     <Redirect to="/" />
                 </Switch>
             </div>
