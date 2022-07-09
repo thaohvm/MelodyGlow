@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import SongCard from "../song/SongCard";
 import MelodyApi from "../api";
+import ReactJkMusicPlayer from 'react-jinke-music-player'
+import 'react-jinke-music-player/assets/index.css'
 
 class PlaylistDetails extends Component {
     constructor(props) {
@@ -25,6 +27,14 @@ class PlaylistDetails extends Component {
 
     render() {
         let { playlist, songs } = this.state;
+
+        const audioLists = [
+            {
+                name: "After the Rain",
+                musicSrc: "https://melody-glow.s3.us-west-1.amazonaws.com/public/After-the-Rain-Inspiring-Atmospheric-Music.mp3",
+            }
+        ]
+
         return (
             <div>
                 <div className="playlist-card my-3">
@@ -43,6 +53,11 @@ class PlaylistDetails extends Component {
                                 viewed={song.viewed}
                             />
                             </ol>)}
+
+                        <ReactJkMusicPlayer
+                            audioLists={audioLists}
+                            mode="full"
+                        />
                     </div>
                 </div>
             </div>

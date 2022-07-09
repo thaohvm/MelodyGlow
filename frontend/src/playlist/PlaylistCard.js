@@ -6,7 +6,7 @@ import SongCard from "../song/SongCard";
 
 class PlaylistCard extends Component {
     render() {
-        let { name, id } = this.props;
+        let { name, id, image_url } = this.props;
         let playlistPage = `/playlist/${id}`;
 
         return (
@@ -16,6 +16,7 @@ class PlaylistCard extends Component {
                         <Link to={playlistPage}>
                             <h5 className="card-title">{name}</h5>
                         </Link>
+                        <img id="img-playlist" src={image_url} width="200" height="200"></img>
                      </div>
                 </div>
             </div>

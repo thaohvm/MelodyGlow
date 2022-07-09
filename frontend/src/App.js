@@ -5,6 +5,8 @@ import Routes from './routes/Routes';
 import MelodyApi from './api';
 import { decode } from "jsonwebtoken";
 import CurrentUserContext from './users/CurrentUserContext';
+import "./App.css";
+import galaxyImage from "./galaxy"
 
 class App extends Component {
   constructor(props) {
@@ -47,7 +49,7 @@ class App extends Component {
     if (this.state.loaded) {
       return (
         <CurrentUserContext.Provider value={this.state}>
-          <div className='App'>
+          <div className='App' style={{ backgroundImage: `url(${galaxyImage})` }}>
             <BrowserRouter>
               <NavBar />
               <main>
