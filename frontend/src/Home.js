@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import CurrentUserContext from './users/CurrentUserContext';
+import './Home.css'
 
 class Home extends Component {
 
@@ -9,9 +10,9 @@ class Home extends Component {
     render() {
         const { currentUser } = this.context;
         let homeContent = (
-            <div>
-                    <h1>MelodyGlow</h1>
-                    <p>Where words fail, music speaks - Hans Christian Andersen</p>
+            <div className='home'>
+                    <h1>Melody Glow</h1>
+                    <p>where words fail, music speaks - Hans Christian Andersen</p>
 
                 <Link to="/login">
                     <button className='btn btn-primary'>
@@ -26,10 +27,10 @@ class Home extends Component {
 
         if (currentUser) {
             homeContent = (
-                <div>
-                    <h1>MelodyGlow</h1>
-                    <p>Where words fail, music speaks - Hans Christian Andersen</p>
-                    <h5>Welcome Back, {currentUser}</h5>
+                <div className='home'>
+                    <h1>Melody Glow</h1>
+                    <h4 className='quote'>where words fail, music speaks - Hans Christian Andersen</h4>
+                    <h4><b>Welcome back, {currentUser}</b></h4>
                 </div>
             )
         }

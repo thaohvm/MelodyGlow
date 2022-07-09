@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 import CurrentUserContext from './users/CurrentUserContext';
+import Container from 'react-bootstrap/Container';
 
 import {
-  Nav, Navbar, NavbarBrand,
-} from 'reactstrap';
+  Nav, Navbar
+} from 'react-bootstrap';
+import "./NavBar.css";
 
 class NavBar extends Component {
   constructor(props) {
@@ -25,48 +26,47 @@ class NavBar extends Component {
     console.log({ currentUser });
     if (currentUser) {
       return (
+        <div className='NavBar'>
+          <Navbar expand="lg" bg="dark" variant="dark">
+            <Container>
+              <Navbar.Brand href="/" className='navbrand'>Melody Glow</Navbar.Brand>
+              {/* <Nav className="me-auto"> */}
+                <Nav.Link href="/genre" className="navbar">
+                  Genres
+                </Nav.Link>
 
-        <Navbar bg="dark" variant="dark">
-          <Container>
-            <Navbar.Brand href="/">Melody Glow</Navbar.Brand>
-            <Nav>
-              <NavLink exact to="/genre" className="navbar">
-                Genres
-              </NavLink>
+                <Nav.Link href="/playlist" className="navbar">
+                  Playlist
+                </Nav.Link>
 
-              <NavLink exact to="/playlist" className="navbar">
-                Playlist
-              </NavLink>
+                <Nav.Link
+                  href="/favorite" className="navbar">
+                  Your Music
+                </Nav.Link>
 
-              <NavLink
-                exact to="/favorite" className="navbar">
-                Your Music
-              </NavLink>
-
-              <NavLink
-                exact to="/logout" className="navbar" onClick={this.logout}>
-                Log out "{currentUser}"
-              </NavLink>
-            </Nav>
-          </Container>
-        </Navbar>
-
-
+                <Nav.Link
+                  href="/logout" className="navbar" onClick={this.logout}>
+                  Log out <b>{currentUser}</b>
+                </Nav.Link>
+              {/* </Nav> */}
+            </Container>
+          </Navbar>
+        </div>
       );
     } else {
       return (
         <Navbar bg="light" expand="lg">
-          <NavbarBrand exact to="/" className="navbar-brand">
+          <Navbar.Brand href="/" className="navbrand">
             Melody Glow
-          </NavbarBrand>
+          </Navbar.Brand>
           <Nav>
-            <NavLink exact to="/login">
+            <Nav.Link href="/login">
               Log in
-            </NavLink>
+            </Nav.Link>
 
-            <NavLink exact to="/signup">
+            <Nav.Link href="/signup">
               Sign up
-            </NavLink>
+            </Nav.Link>
           </Nav>
         </Navbar>
       );

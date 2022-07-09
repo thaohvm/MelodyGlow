@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import MelodyApi from "../api";
 import GenreCard from "./GenreCard";
+import './GenreList.css'
 
 class GenreList extends Component {
     constructor(props) {
@@ -21,14 +22,16 @@ class GenreList extends Component {
         return (
             <div className='GenreList'>
                 <h1> List of genres</h1>
+                <div className="genreList">
+                    {genres.map(genre => (
+                        <GenreCard
+                            key={genre.id}
+                            id={genre.id}
+                            name={genre.name}
+                        />
+                    ))}
+                </div>
 
-                {genres.map(genre => (
-                    <GenreCard
-                    key={genre.id}
-                    id={genre.id}
-                    name={genre.name}
-                    />
-                ))}
             </div>
         )
     }
