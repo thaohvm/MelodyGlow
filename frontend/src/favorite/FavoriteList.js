@@ -3,6 +3,7 @@ import NewPlaylistForm from "./NewPlaylistForm";
 import MelodyApi from "../api";
 import CurrentUserContext from "../users/CurrentUserContext";
 import { Link } from "react-router-dom";
+import { Card } from "react-bootstrap";
 
 class FavoriteList extends Component {
     static contextType = CurrentUserContext;
@@ -32,19 +33,23 @@ class FavoriteList extends Component {
         let playlists = null;
         if (this.state.playlists !== null) {
             playlists = this.state.playlists.map((playlist) =>
-                <div>
-                    <li><Link to={`/playlist/${playlist.id}`}>{playlist.name}</Link></li>
-                    <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/record.png" width="100"></img>
-                </div>
+
+                    <Card style={{ width: '15rem' }}>
+                        <Card.Img variant="top" src="https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/image/rDtN98Qoishumwih/abstract-musical-notes-background_MJS0eqv__thumb.jpg" width="100"></Card.Img>
+                        <Card.Body>
+                            <Card.Title>
+                                <Link to={`/playlist/${playlist.id}`}><h5 className="card-title">{playlist.name}</h5></Link>
+                            </Card.Title>
+                        </Card.Body>
+                    </Card>
 
             );
         }
-
         return (
-            <div>
+            <div className="Favorite">
                 <NewPlaylistForm refreshPlaylists={this.refreshPlaylists} />
                 <h2>
-                    Your playlists:
+                    Your playlists
                 </h2>
                 <ul>
                     {playlists}

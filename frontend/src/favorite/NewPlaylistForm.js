@@ -31,8 +31,8 @@ class NewPlaylistForm extends Component {
             <div className='NewPlaylistForm'>
                 <h1>Create new playlist</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <label htmlFor='playlistName'>Playlist Name: </label>
+
+                        <label htmlFor='playlistName'>Playlist Name :</label>
                         <input
                             type="text"
                             name="name"
@@ -40,7 +40,7 @@ class NewPlaylistForm extends Component {
                             value={this.state.name}
                             onChange={this.handleChange}
                         />
-                    </div>
+
                     <button className='btn btn-primary'>Create</button>
                 </form>
             </div>

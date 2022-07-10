@@ -6,7 +6,7 @@ import MelodyApi from './api';
 import { decode } from "jsonwebtoken";
 import CurrentUserContext from './users/CurrentUserContext';
 import "./App.css";
-import galaxyImage from "./galaxy.png";
+import galaxyImage from "./purple.jpeg";
 
 class App extends Component {
   constructor(props) {

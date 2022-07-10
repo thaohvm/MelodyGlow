@@ -5,7 +5,6 @@ import Container from 'react-bootstrap/Container';
 import {
   Nav, Navbar
 } from 'react-bootstrap';
-import "./NavBar.css";
 
 class NavBar extends Component {
   constructor(props) {
@@ -27,7 +26,7 @@ class NavBar extends Component {
     if (currentUser) {
       return (
         <div className='NavBar'>
-          <Navbar expand="lg" bg="dark" variant="dark">
+          <Navbar expand="lg">
             <Container>
               <Navbar.Brand href="/" className='navbrand'>Melody Glow</Navbar.Brand>
               {/* <Nav className="me-auto"> */}

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import MelodyApi from "../api";
 import CurrentUserContext from "../users/CurrentUserContext";
+import ListGroup from 'react-bootstrap/ListGroup';
+
 
 class SongCard extends Component {
     static contextType = CurrentUserContext;
@@ -50,23 +52,48 @@ class SongCard extends Component {
         let { playlists } = this.state;
 
         return (
-            <div>
-                <div className="song-card my-3">
-                    <div className="card-body">
-                        <h5>{song.title}</h5>
-                        <p>By {song.artist}</p>
-                        {/* <p>{song.uri}</p> */}
-                        {/* <p>Length: {song.length}</p>
-                        <p>Viewed: {song.viewed}</p> */}
-                    </div>
-                    <select onChange={this.handlePlaylistSelectChange} class="form-select">
-                        <option selected>{SongCard.defaultPlaylistText}</option>
-                        {playlists.map((playlist) =>
-                            <option value={playlist.id}>{playlist.name}</option>)}
-                    </select>
-                    <button onClick={this.addToPlaylist}>Add</button>
-                </div>
-            </div>
+
+            <ListGroup as="ul">
+                <ListGroup.Item as="li" active>
+                    Cras justo odio
+                </ListGroup.Item>
+                <ListGroup.Item as="li">Dapibus ac facilisis in</ListGroup.Item>
+                <ListGroup.Item as="li" disabled>
+                    Morbi leo risus
+                </ListGroup.Item>
+                <ListGroup.Item as="li">Porta ac consectetur ac</ListGroup.Item>
+            </ListGroup>
+
+            // <ListGroup as="ul">
+            //     <ListGroup.Item as="li">
+            //         <h5>{song.title}</h5>
+            //         <p>By {song.artist}</p>
+            //         <select onChange={this.handlePlaylistSelectChange} class="form-select">
+            //             <option selected>{SongCard.defaultPlaylistText}</option>
+            //             {playlists.map((playlist) =>
+            //                 <option value={playlist.id}>{playlist.name}</option>)}
+            //         </select>
+            //         <button onClick={this.addToPlaylist}>Add</button>
+            //     </ListGroup.Item>
+            // </ListGroup>
+
+            // <div>
+            //     <div className="song-card my-3">
+            //         <div className="card-body">
+            //             <h5>{song.title}</h5>
+            //             <p>By {song.artist}</p>
+            //             {/* <p>{song.uri}</p> */}
+            //             {/* <p>Length: {song.length}</p>
+            //             <p>Viewed: {song.viewed}</p> */}
+            //         </div>
+            //         <select onChange={this.handlePlaylistSelectChange} class="form-select">
+            //             <option selected>{SongCard.defaultPlaylistText}</option>
+            //             {playlists.map((playlist) =>
+            //                 <option value={playlist.id}>{playlist.name}</option>)}
+            //         </select>
+            //         <button onClick={this.addToPlaylist}>Add</button>
+            //     </div>
+            // </div>
         );
     }
 }

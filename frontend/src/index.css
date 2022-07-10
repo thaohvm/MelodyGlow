@@ -12,3 +12,48 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.navbar, .navbrand {
+  padding: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: 'Kanit', sans-serif;
+  color: white !important;
+  background-color: rgb(18, 2, 96);
+  margin-bottom: 10px;
+}
+
+.navbrand {
+  font-size: 20px
+}
+
+.GenreCard, h5, h1{
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: 'Kanit', sans-serif;
+  font-size: large;
+  margin-bottom: 10px;
+}
+
+.GenreList, .PlaylistList{
+  padding: 10px;
+}
+
+.card-title {
+  color: black !important;
+  text-decoration: none;
+  font-family: 'Kanit', sans-serif;
+  font-size: large;
+}
+
+.card {
+  justify-content: center;
+}
+
+form {
+  font-weight: bold;
+  font-family: 'Kanit', sans-serif;
+  font-size: large;
+  padding: 20px;
+}

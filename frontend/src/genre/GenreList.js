@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import { Col, Container, Row } from "react-bootstrap";
 import MelodyApi from "../api";
 import GenreCard from "./GenreCard";
-import './GenreList.css'
 
 class GenreList extends Component {
     constructor(props) {
@@ -22,15 +22,19 @@ class GenreList extends Component {
         return (
             <div className='GenreList'>
                 <h1> List of genres</h1>
-                <div className="genreList">
-                    {genres.map(genre => (
-                        <GenreCard
-                            key={genre.id}
-                            id={genre.id}
-                            name={genre.name}
-                        />
-                    ))}
-                </div>
+                <Container>
+                    <Row>
+                        {genres.map(genre => (
+                            <Col className="mb-4">
+                                <GenreCard
+                                    key={genre.id}
+                                    id={genre.id}
+                                    name={genre.name}
+                                />
+                            </Col>
+                        ))}
+                    </Row>
+                </Container>
 
             </div>
         )
