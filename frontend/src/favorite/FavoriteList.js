@@ -33,7 +33,7 @@ class FavoriteList extends Component {
         let playlists = null;
         if (this.state.playlists !== null) {
             playlists = this.state.playlists.map((playlist) =>
-
+                <div className="fav-card">
                     <Card style={{ width: '15rem' }}>
                         <Card.Img variant="top" src="https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/image/rDtN98Qoishumwih/abstract-musical-notes-background_MJS0eqv__thumb.jpg" width="100"></Card.Img>
                         <Card.Body>
@@ -42,7 +42,7 @@ class FavoriteList extends Component {
                             </Card.Title>
                         </Card.Body>
                     </Card>
-
+                </div>
             );
         }
         return (
@@ -51,9 +51,9 @@ class FavoriteList extends Component {
                 <h2>
                     Your playlists
                 </h2>
-                <ul>
+                <div className="container">
                     {playlists}
-                </ul>
+                </div>
             </div>
         );
     }

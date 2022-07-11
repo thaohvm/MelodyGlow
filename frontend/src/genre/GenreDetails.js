@@ -30,7 +30,7 @@ class GenreDetails extends Component {
                 <div className="genre-card my-3">
                     <div className="card-body">
 
-                        <h5 className="card-title">Genre: {genre.name}</h5>
+                        <h5 className="genre-title">Genre: {genre.name}</h5>
                         <p>Song list:</p>
                         {songs.map(song =>
                             <ol><SongCard

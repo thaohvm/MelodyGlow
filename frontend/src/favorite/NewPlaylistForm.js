@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import MelodyApi from "../api";
 import CurrentUserContext from '../users/CurrentUserContext';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 class NewPlaylistForm extends Component {
     static contextType = CurrentUserContext;
@@ -21,7 +23,7 @@ class NewPlaylistForm extends Component {
 
     async handleSubmit(e) {
         e.preventDefault();
-        let {currentUser} = this.context;
+        let { currentUser } = this.context;
         await MelodyApi.createNewPlaylist({ username: currentUser, name: this.state.name, image_url: this.state.image_url });
         await this.props.refreshPlaylists();
     }
@@ -29,20 +31,26 @@ class NewPlaylistForm extends Component {
     render() {
         return (
             <div className='NewPlaylistForm'>
-                <h1>Create new playlist</h1>
-                <form onSubmit={this.handleSubmit}>
+                <Form>
+                    <h1>Create new playlist</h1>
+                    <form onSubmit={this.handleSubmit}>
 
-                        <label htmlFor='playlistName'>Playlist Name :</label>
-                        <input
-                            type="text"
-                            name="name"
-                            placeholder='Start typing...'
-                            value={this.state.name}
-                            onChange={this.handleChange}
-                        />
+                        <Form.Group className="mb-3">
+                            <Form.Label>Playlist Name</Form.Label>
+                            <Form.Control
+                                placeholder='New playlist ...'
+                                type="text"
+                                name="name"
+                                value={this.state.name}
+                                onChange={this.handleChange}
+                            />
+                        </Form.Group>
+                        <Button variant="primary" type="submit">
+                            Create
+                        </Button>
+                    </form>
+                </Form>
 
-                    <button className='btn btn-primary'>Create</button>
-                </form>
             </div>
         )
     }

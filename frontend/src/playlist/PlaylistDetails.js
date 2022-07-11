@@ -40,7 +40,7 @@ class PlaylistDetails extends Component {
                 <div className="playlist-card my-3">
                     <div className="card-body">
 
-                        <h5 className="card-title">Playlist: {playlist.name}</h5>
+                        <h5 className="playlist-title">Playlist: {playlist.name}</h5>
                         <p>Song list:</p>
                         {songs.map(song =>
                             <ol><SongCard

@@ -13,6 +13,10 @@ code {
     monospace;
 }
 
+.home {
+  text-align: center;
+}
+
 .navbar, .navbrand {
   padding: 20px;
   text-decoration: none;
@@ -27,7 +31,7 @@ code {
   font-size: 20px
 }
 
-.GenreCard, h5, h1{
+.GenreCard, h5, h1, h2{
   color: white;
   text-decoration: none;
   font-weight: bold;
@@ -56,4 +60,16 @@ form {
   font-family: 'Kanit', sans-serif;
   font-size: large;
   padding: 20px;
+}
+
+.SongCard {
+  text-align: left;
+}
+
+select {
+  text-align: right;
+}
+
+.fav-card {
+  margin: 20px;
 }
