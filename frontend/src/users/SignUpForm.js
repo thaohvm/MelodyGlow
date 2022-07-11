@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Form, FormGroup, Button } from 'react-bootstrap';
 
 class SignUpForm extends Component {
     constructor(props) {
@@ -26,46 +27,42 @@ class SignUpForm extends Component {
     render() {
         return (
             <div className='SignUpForm'>
-                <h1>Register an account</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <label htmlFor='username'>Username: </label>
-                        <input
-                            type="text"
-                            name="username"
-                            value={this.state.username}
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor='password'>Password: </label>
-                        <input
-                            type="password"
-                            name="password"
-                            value={this.state.password}
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor='email'>Email: </label>
-                        <input
-                            type="text"
-                            name="email"
-                            value={this.state.email}
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor='location'>Location: </label>
-                        <input
-                            type="text"
-                            name="location"
-                            value={this.state.location}
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <button className='btn btn-primary'>Register</button>
-                </form>
+                <div className='container'>
+                    <h1>Register an account</h1>
+                    <form onSubmit={this.handleSubmit}>
+                        <Form.Group>
+                            <Form.Label>Username:</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="username"
+                                value={this.state.username}
+                                onChange={this.handleChange} />
+
+                            <Form.Label>Password:</Form.Label>
+                            <Form.Control
+                                type="password"
+                                name="password"
+                                value={this.state.password}
+                                onChange={this.handleChange} />
+
+                            <Form.Label>Email:</Form.Label>
+                            <Form.Control
+                                type="email"
+                                name="email"
+                                value={this.state.email}
+                                onChange={this.handleChange} />
+
+                            <Form.Label>Location:</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="location"
+                                value={this.state.location}
+                                onChange={this.handleChange} />
+                        </Form.Group>
+                        <Button variant="primary" type="submit">Register</Button>
+                    </form>
+                </div>
+
             </div>
         )
     }

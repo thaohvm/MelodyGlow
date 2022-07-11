@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button, Form } from 'react-bootstrap';
 
 class LoginForm extends Component {
     constructor(props) {
@@ -23,28 +24,25 @@ class LoginForm extends Component {
     render() {
         return (
             <div className='LoginForm'>
-                <h1>Login</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <label htmlFor='username'>Username: </label>
-                        <input
-                            type="text"
-                            name="username"
-                            value={this.state.username}
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor='password'>Password: </label>
-                        <input
-                            type="password"
-                            name="password"
-                            value={this.state.password}
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <button className='btn btn-primary'>Login</button>
-                </form>
+                <div className='container'>
+                    <h1>Login</h1>
+                    <form onSubmit={this.handleSubmit}>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Username:</Form.Label>
+                            <Form.Control type="text"
+                                name="username"
+                                value={this.state.username}
+                                onChange={this.handleChange} />
+                            <Form.Label>Password:</Form.Label>
+                            <Form.Control type="password"
+                                name="password"
+                                value={this.state.password}
+                                onChange={this.handleChange} />
+                        </Form.Group>
+                        <Button variant="primary" type="submit">Login</Button>
+                    </form>
+                </div>
+
             </div>
         )
     }

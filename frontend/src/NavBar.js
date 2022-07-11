@@ -54,16 +54,16 @@ class NavBar extends Component {
       );
     } else {
       return (
-        <Navbar bg="light" expand="lg">
+        <Navbar expand="lg">
           <Navbar.Brand href="/" className="navbrand">
             Melody Glow
           </Navbar.Brand>
           <Nav>
-            <Nav.Link href="/login">
+            <Nav.Link href="/login" className="navbar">
               Log in
             </Nav.Link>
 
-            <Nav.Link href="/signup">
+            <Nav.Link href="/signup" className="navbar">
               Sign up
             </Nav.Link>
           </Nav>

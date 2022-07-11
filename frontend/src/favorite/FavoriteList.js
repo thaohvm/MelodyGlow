@@ -48,10 +48,11 @@ class FavoriteList extends Component {
         return (
             <div className="Favorite">
                 <NewPlaylistForm refreshPlaylists={this.refreshPlaylists} />
-                <h2>
-                    Your playlists
-                </h2>
+
                 <div className="container">
+                    <h2>
+                        Your playlists
+                    </h2>
                     {playlists}
                 </div>
             </div>

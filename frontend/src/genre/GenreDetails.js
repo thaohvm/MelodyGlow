@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import SongCard from "../song/SongCard";
 import MelodyApi from "../api";
+import ReactJkMusicPlayer from 'react-jinke-music-player';
+import 'react-jinke-music-player/assets/index.css';
 
 class GenreDetails extends Component {
     constructor(props) {
@@ -25,6 +27,14 @@ class GenreDetails extends Component {
 
     render() {
         let { genre, songs } = this.state;
+
+        let audioLists = [];
+        for (const song of songs) {
+            audioLists.push({
+                name: song.title,
+                musicSrc: song.uri,
+            })
+        }
         return (
             <div>
                 <div className="genre-card my-3">
@@ -44,6 +54,11 @@ class GenreDetails extends Component {
                             />
                             </ol>)}
                     </div>
+                </div>
+                <div>
+                <ReactJkMusicPlayer
+                    audioLists={audioLists}
+                    mode="full"/>
                 </div>
             </div>
         );
